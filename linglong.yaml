@@ -3,10 +3,11 @@ version: "1"
 package:
   id: com.wymail.deepin
   name: com.wymail.deepin
-  version: 1.0.0.0
+  version: 1.0.0.1
   kind: app
   description: |
-    signed_com.wymail.deepin_5.1.4.1013deepin2_amd64.deb
+    signed_com.wymail.deepin_5.1.4.1013deepin3_amd64.deb
+
 
 base: org.deepin.base.wine/23.2.0
 runtime: org.deepin.runtime.wine/23.2.1
@@ -16,13 +17,15 @@ command:
 
 sources:
   - kind: file
-    url: https://winedata-dev.deepin.com/apps/com.wymail.deepin/90fd6cf/signed_com.wymail.deepin_5.1.4.1013deepin2_amd64.deb
-    digest: 4b22765ec9a7d98df038c19b921188f9cd9b086e4fc1cbb35dfc101b47336999
+    url: https://winedata-dev.deepin.com/apps/com.wymail.deepin/745ea3c/signed_com.wymail.deepin_5.1.4.1013deepin3_amd64.deb
+    digest: faec3735f901d1c4b94241bd36a4adbf536494749685a330cb4365c073011d25
+
 
 build: |
   set -x
   SOURCES="linglong/sources"
-  dpkg-deb -x $SOURCES/signed_com.wymail.deepin_5.1.4.1013deepin2_amd64.deb $SOURCES/com.wymail.deepin
+  dpkg-deb -x $SOURCES/signed_com.wymail.deepin_5.1.4.1013deepin3_amd64.deb $SOURCES/com.wymail.deepin
+
   # run.sh替换
   FILE_PATH="$SOURCES/com.wymail.deepin/opt/apps/com.wymail.deepin/files/run.sh" 
   sed -i -e 's|/opt/deepin-wine8-stable|/runtime/deepin-wine8-stable|g' \
