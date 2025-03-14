@@ -3,10 +3,10 @@ version: "1"
 package:
   id: com.wymail.deepin
   name: com.wymail.deepin
-  version: 1.0.0.1
+  version: 1.0.0.3
   kind: app
   description: |
-    signed_com.wymail.deepin_5.1.4.1013deepin3_amd64.deb
+    com.wymail.deepin_5.1.4.1013deepin4_amd64.deb
 
 
 base: org.deepin.base.wine/23.2.0
@@ -17,14 +17,14 @@ command:
 
 sources:
   - kind: file
-    url: https://winedata-dev.deepin.com/apps/com.wymail.deepin/745ea3c/signed_com.wymail.deepin_5.1.4.1013deepin3_amd64.deb
-    digest: faec3735f901d1c4b94241bd36a4adbf536494749685a330cb4365c073011d25
+    url: https://winedata-dev.deepin.com/apps/com.wymail.deepin/7d2be8b/com.wymail.deepin_5.1.4.1013deepin4_amd64.deb
+    digest: 74657d6fe949e865ab36f30d935f651d34eac6056836a65594ef78713e61f092
 
 
 build: |
   set -x
   SOURCES="linglong/sources"
-  dpkg-deb -x $SOURCES/signed_com.wymail.deepin_5.1.4.1013deepin3_amd64.deb $SOURCES/com.wymail.deepin
+  dpkg-deb -x $SOURCES/com.wymail.deepin_5.1.4.1013deepin4_amd64.deb $SOURCES/com.wymail.deepin
 
   # run.sh替换
   FILE_PATH="$SOURCES/com.wymail.deepin/opt/apps/com.wymail.deepin/files/run.sh" 
@@ -32,7 +32,7 @@ build: |
          -e 's|/opt/deepin-wine6-stable|/runtime/deepin-wine6-stable|g' \
          -e 's|/opt/deepinwine|/runtime/deepinwine|g' \
          -e 's|/opt/deepin-box86|/runtime/deepin-box86|g' \
-         -e 's|BOTTLEPATH="$HOME/.deepinwine/$BOTTLENAME"|BOTTLEPATH="$HOME/.linglong/$BOTTLENAME"|g' "$FILE_PATH"
+         -e '/BOTTLENAME=/s/$/&.linglong/' "$FILE_PATH"
    
   install -d $PREFIX/share
   install -d $PREFIX/bin
